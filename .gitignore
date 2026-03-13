@@ -1,0 +1,11 @@
+node_modules
+.DS_Store
+*.log
+.vercel
+server.js
+START_SERVER.bat
+test.txt
+test_access.txt
+test_server.js
+file_list.csv
+recent_files.csv

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Development Expertise | Rudra Shah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .skill-detail-hero {
+            padding: 160px 0 80px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(167, 139, 250, 0.05) 0%, transparent 70%);
+        }
+
+        .skill-detail-hero h1 {
+            font-family: var(--heading-font);
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to bottom, #FFFFFF 30%, #F6AD55 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(167, 139, 250, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.75rem;
+            color: #a78bfa;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sub-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .sub-tag {
+            padding: 0.4rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .ge-card-outer:hover .sub-tag {
+            border-color: rgba(167, 139, 250, 0.3);
+            color: #fff;
+        }
+
+        .back-link-wrap {
+            margin-bottom: 3rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fluid-container">
+        <canvas id="fluid"></canvas>
+        <div class="cursor-core" id="cursor-core"></div>
+    </div>
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+    <div id="ethereal-hero" class="ethereal-bg" aria-hidden="true">
+        <div class="ethereal-inner" id="ethereal-inner-hero">
+            <div class="ethereal-mask ethereal-mask--blue"></div>
+            <div class="ethereal-mask ethereal-mask--purple"></div>
+        </div>
+        <div class="ethereal-noise" aria-hidden="true"></div>
+    </div>
+
+    <header class="header" id="header">
+        <nav class="anime-nav" id="anime-nav">
+            <div class="anime-nav__active-pill" id="anime-nav-pill"></div>
+
+            <div class="anime-mascot" id="anime-mascot">
+                <div class="anime-mascot__inner">
+                    <div class="anime-mascot__tail"></div>
+                    <div class="anime-mascot__body">
+                        <div class="anime-mascot__face">
+                            <div class="anime-mascot__eye anime-mascot__eye--left"></div>
+                            <div class="anime-mascot__eye anime-mascot__eye--right"></div>
+                            <div class="anime-mascot__blush anime-mascot__blush--left"></div>
+                            <div class="anime-mascot__blush anime-mascot__blush--right"></div>
+                            <div class="anime-mascot__mouth"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="anime-nav__list">
+                <li class="anime-nav__item">
+                    <a href="index.html#hero" class="anime-nav__link" data-nav-name="Home">
+                        <span>Home</span>
+                        <i data-lucide="home" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="anime-nav__item">
+                    <a href="index.html#about" class="anime-nav__link" data-nav-name="About">
+                        <span>About</span>
+                        <i data-lucide="user" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="anime-nav__item">
+                    <a href="index.html#work" class="anime-nav__link" data-nav-name="Work">
+                        <span>Work</span>
+                        <i data-lucide="layout" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="anime-nav__item">
+                    <a href="index.html#contact" class="anime-nav__link" data-nav-name="Contact">
+                        <span>Contact</span>
+                        <i data-lucide="mail" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="skill-detail-hero">
+            <div class="container">
+                <div class="back-link-wrap">
+                    <a href="index.html#skills" class="btn btn--primary" style="background: rgba(99, 179, 237, 0.1); border: 1px solid rgba(99, 179, 237, 0.3);">
+                        <i data-lucide="arrow-left" style="width: 18px; height: 18px; color: var(--accent);"></i>
+                        <span>Back to Skills</span>
+                    </a>
+                </div>
+            <h1 data-animate>Development</h1>
+            <p class="work__sub" data-animate data-delay="100">Building scalable, resilient, and high-performance
+                digital solutions.</p>
+            </div>
+        </section>
+
+        <section class="expertise-section">
+            <div class="container">
+
+            <div class="section-header" data-animate style="margin-top: 2rem; margin-bottom: 3rem;">
+                <h2 class="section-title" style="font-size: 1.8rem;">Technical Expertise</h2>
+            </div>
+
+            <ul class="ge-grid">
+                <!-- Web Dev -->
+                <li class="ge-item" data-animate data-delay="200">
+                    <div class="ge-card-outer">
+                        <div class="glowing-effect" aria-hidden="true"></div>
+                        <div class="ge-card-inner">
+                            <div class="category-icon">
+                                <i data-lucide="code-2"></i>
+                            </div>
+                            <div class="ge-body">
+                                <h3>Web Development</h3>
+                                <p>Modern frontend architectures using React and Next.js, focusing on performance, SEO,
+                                    and accessibility.</p>
+                                <div class="sub-skills">
+                                    <span class="sub-tag">Next.js</span>
+                                    <span class="sub-tag">React</span>
+                                    <span class="sub-tag">TypeScript</span>
+                                    <span class="sub-tag">Tailwind</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- App Dev -->
+                <li class="ge-item" data-animate data-delay="300">
+                    <div class="ge-card-outer">
+                        <div class="glowing-effect" aria-hidden="true"></div>
+                        <div class="ge-card-inner">
+                            <div class="category-icon">
+                                <i data-lucide="smartphone"></i>
+                            </div>
+                            <div class="ge-body">
+                                <h3>App Development</h3>
+                                <p>Cross-platform mobile applications that offer native-level performance with
+                                    beautiful, responsive interfaces.</p>
+                                <div class="sub-skills">
+                                    <span class="sub-tag">React Native</span>
+                                    <span class="sub-tag">Flutter</span>
+                                    <span class="sub-tag">iOS/Android</span>
+                                    <span class="sub-tag">Firebase</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Game Dev -->
+                <li class="ge-item" data-animate data-delay="400">
+                    <div class="ge-card-outer">
+                        <div class="glowing-effect" aria-hidden="true"></div>
+                        <div class="ge-card-inner">
+                            <div class="category-icon">
+                                <i data-lucide="gamepad-2"></i>
+                            </div>
+                            <div class="ge-body">
+                                <h3>Game Development</h3>
+                                <p>Interactive web-based games and experiences using Three.js and specialized physics
+                                    engines for the browser.</p>
+                                <div class="sub-skills">
+                                    <span class="sub-tag">Three.js</span>
+                                    <span class="sub-tag">WebGL</span>
+                                    <span class="sub-tag">Game Loop</span>
+                                    <span class="sub-tag">Physics</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Fullstack -->
+                <li class="ge-item" data-animate data-delay="500">
+                    <div class="ge-card-outer">
+                        <div class="glowing-effect" aria-hidden="true"></div>
+                        <div class="ge-card-inner">
+                            <div class="category-icon">
+                                <i data-lucide="layers"></i>
+                            </div>
+                            <div class="ge-body">
+                                <h3>Fullstack Systems</h3>
+                                <p>Architecting secure backends, database management, and real-time systems to support
+                                    complex applications.</p>
+                                <div class="sub-skills">
+                                    <span class="sub-tag">Node.js</span>
+                                    <span class="sub-tag">MongoDB</span>
+                                    <span class="sub-tag">PostgreSQL</span>
+                                    <span class="sub-tag">API Design</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <!-- Featured Projects Section (Moved to bottom) -->
+            <div class="section-header" data-animate style="margin-top: 6rem; margin-bottom: 3rem;">
+                <h2 class="section-title" style="font-size: 2.5rem;">Live Project Showcase</h2>
+            </div>
+            
+            <div class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                <!-- Project 1: Keshavam -->
+                <article class="project-card" data-animate>
+                    <div class="project-card__image-wrap">
+                        <div class="project-card__image" style="background: url('assets/work/keshva.png.png') center/cover no-repeat; height: 260px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        </div>
+                    </div>
+                    <div class="project-card__body" style="text-align: center;">
+                        <h3 class="project-card__title">Keshavam Restaurant</h3>
+                        <p class="project-card__desc">A high-conversion web platform for a luxury banquet and dining brand.</p>
+                        <a href="https://spontaneous-jelly-337ba5.netlify.app/" target="_blank" class="btn btn--primary" style="width: 100%;">
+                            <span>Launch Live Site</span>
+                            <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 2: Parth -->
+                <article class="project-card" data-animate data-delay="100">
+                    <div class="project-card__image-wrap">
+                        <div class="project-card__image" style="background: url('assets/work/parth.png.png') center/cover no-repeat; height: 260px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        </div>
+                    </div>
+                    <div class="project-card__body" style="text-align: center;">
+                        <h3 class="project-card__title">Parth FMCG Hub</h3>
+                        <p class="project-card__desc">Real-time inventory and pricing platform for large-scale sales agency.</p>
+                        <a href="https://parth-nu.vercel.app/" target="_blank" class="btn btn--primary" style="width: 100%;">
+                            <span>Launch Live Site</span>
+                            <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="contact section">
+        <div class="container">
+            <p class="contact__copy">&copy; 2026 Rudra Shah. Crafted with care.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ogl@1.0.11/dist/ogl.umd.js"></script>
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

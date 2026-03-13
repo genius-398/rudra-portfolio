@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Standard SEO Meta Tags -->
+  <meta name="description"
+    content="Hey 👋 I’m Rudra Shah. Disciplined creator blending design, development, and AI to build meaningful digital experiences." />
+  <meta name="keywords" content="Rudra Shah, Designer, Developer, AI Architect, Portfolio, UI/UX, Graphic Design" />
+  <meta name="author" content="Rudra Shah" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rudrashah.com/" />
+  <meta property="og:title" content="Rudra Shah | Designer, Developer, AI Architect" />
+  <meta property="og:description"
+    content="I turn imagination into visuals and ideas into intelligent automation. Let's build something futuristic together." />
+  <meta property="og:image" content="https://rudrashah.com/profile.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://rudrashah.com/" />
+  <meta property="twitter:title" content="Rudra Shah | Designer, Developer, AI Architect" />
+  <meta property="twitter:description"
+    content="I turn imagination into visuals and ideas into intelligent automation. Let's build something futuristic together." />
+  <meta property="twitter:image" content="https://rudrashah.com/profile.jpg" />
+
+  <title>Rudra Shah | Designer, Developer, AI Architect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="ProfileCard.css" />
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.72/build/spline-viewer.js"></script>
+</head>
+
+<body>
+  <!-- Splash Cursor Fluid Canvas -->
+  <div class="fluid-container">
+    <canvas id="fluid"></canvas>
+    <div class="cursor-core" id="cursor-core"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       BACKGROUND ELEMENTS
+  ═══════════════════════════════════════ -->
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- Ethereal Shadow Hero Background -->
+  <div id="ethereal-hero" class="ethereal-bg" aria-hidden="true">
+    <div class="ethereal-inner" id="ethereal-inner-hero">
+      <div class="ethereal-mask ethereal-mask--blue"></div>
+      <div class="ethereal-mask ethereal-mask--purple"></div>
+    </div>
+    <div class="ethereal-noise" aria-hidden="true"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       HEADER / NAVIGATION
+  ═══════════════════════════════════════ -->
+  <header class="header" id="header">
+    <nav class="anime-nav" id="anime-nav">
+      <!-- Active Highlight/Glow Pill -->
+      <div class="anime-nav__active-pill" id="anime-nav-pill"></div>
+
+      <!-- Anime Mascot -->
+      <div class="anime-mascot" id="anime-mascot">
+        <div class="anime-mascot__inner">
+          <div class="anime-mascot__tail"></div>
+          <div class="anime-mascot__body">
+            <div class="anime-mascot__face">
+              <div class="anime-mascot__eye anime-mascot__eye--left"></div>
+              <div class="anime-mascot__eye anime-mascot__eye--right"></div>
+              <div class="anime-mascot__blush anime-mascot__blush--left"></div>
+              <div class="anime-mascot__blush anime-mascot__blush--right"></div>
+              <div class="anime-mascot__mouth"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="anime-nav__list">
+        <li class="anime-nav__item">
+          <a href="#hero" class="anime-nav__link is-active" data-nav-name="Home">
+            <span>Home</span>
+            <i data-lucide="home" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="anime-nav__item">
+          <a href="#about" class="anime-nav__link" data-nav-name="About">
+            <span>About</span>
+            <i data-lucide="user" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="anime-nav__item">
+          <a href="#work" class="anime-nav__link" data-nav-name="Work">
+            <span>Work</span>
+            <i data-lucide="layout" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li class="anime-nav__item">
+          <a href="#contact" class="anime-nav__link" data-nav-name="Contact">
+            <span>Contact</span>
+            <i data-lucide="mail" aria-hidden="true"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ═══════════════════════════════════════
+         HERO SECTION
+    ═══════════════════════════════════════ -->
+    <section class="hero" id="hero">
+      <div class="container hero__grid">
+        <!-- Text 60% -->
+        <div class="hero__text">
+          <div class="hero__eyebrow">
+            <span class="hero__eyebrow-dot"></span>
+            Available for new projects
+          </div>
+          <h1 class="hero__headline">
+            Hi, I'm <span class="gradient-text">Rudra Shah</span><span class="white-text">,</span><br />
+            <span class="white-text">a</span> <span id="typewriter-target">Designer</span><span
+              class="typewriter-cursor" aria-hidden="true"></span>
+          </h1>
+          <p class="hero__sub">
+            I craft digital experiences that blend aesthetics with functionality —
+            turning complex problems into elegant, user-centred solutions.
+          </p>
+          <div class="hero__actions">
+            <a href="#work" class="btn btn--primary btn--lg" id="view-work-btn">
+              <span>View My Work</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <a href="#" class="btn btn--ghost btn--lg" id="download-resume-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+              </svg>
+              <span>Download Resume</span>
+            </a>
+          </div>
+          <div class="hero__stats" role="list">
+            <div class="hero__stat" role="listitem">
+              <strong data-count="5">0</strong><span>Years Exp.</span>
+            </div>
+            <div class="hero__stat-divider"></div>
+            <div class="hero__stat" role="listitem">
+              <strong data-count="60">0</strong><span>Projects</span>
+            </div>
+            <div class="hero__stat-divider"></div>
+            <div class="hero__stat" role="listitem">
+              <strong data-count="30">0</strong><span>Clients</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 40% -->
+        <div class="hero__image-wrap">
+
+          <!-- LaserFlow WebGL canvas — fills image wrap, BEHIND photo -->
+          <div id="laser-flow-mount" aria-hidden="true"></div>
+
+          <!-- The Premium Profile Card -->
+          <div class="pc-card-wrapper" id="hero-profile-card">
+            <div class="pc-behind"></div>
+            <div class="pc-card-shell" id="hero-card-shell">
+              <section class="pc-card">
+                <div class="pc-inside">
+                  <div class="pc-shine"></div>
+                  <div class="pc-glare"></div>
+                  <div class="pc-content pc-avatar-content">
+                    <img class="avatar" src="profile.jpg" alt="Rudra Shah avatar" loading="lazy" />
+                    <div class="pc-user-info">
+                      <div class="pc-user-details">
+                        <div class="pc-mini-avatar">
+                          <img src="profile.jpg" alt="Rudra Shah mini avatar" loading="lazy" />
+                        </div>
+                        <div class="pc-user-text">
+                          <div class="pc-handle">@rudra_shah</div>
+                          <div class="pc-status">Available</div>
+                        </div>
+                      </div>
+                      <button class="pc-contact-btn" id="card-contact-btn" type="button">Contact Me</button>
+                    </div>
+                  </div>
+                  <div class="pc-content">
+                    <div class="pc-details">
+                      <h3>Rudra Shah</h3>
+                      <p>Creative Designer</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <!-- Decorations -->
+          <div class="hero__glow-ring hero__glow-ring--1" aria-hidden="true"></div>
+          <div class="hero__glow-ring hero__glow-ring--2" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scrolling Ticker -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track" id="ticker-track">
+        <span class="ticker__item"><span class="ticker__dot"></span>UI Design</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>UX Research</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Web Design</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Prototyping</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Branding</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Motion Design</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Figma</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>React</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Webflow</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Framer</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Graphic Design</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Video Editing</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>3D Modeling</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Ad Making</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Web Development</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>App Development</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>AI Chatbot</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>AI Automation</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Game Development</span>
+        <!-- duplicated for seamless loop -->
+        <span class="ticker__item"><span class="ticker__dot"></span>UI Design</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>UX Research</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Web Design</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Prototyping</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Branding</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Motion Design</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Figma</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>React</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Webflow</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Framer</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Graphic Design</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Video Editing</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>3D Modeling</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Ad Making</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Web Development</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>App Development</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>AI Chatbot</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>AI Automation</span>
+        <span class="ticker__item"><span class="ticker__dot"></span>Game Development</span>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         ABOUT & SKILLS
+    ═══════════════════════════════════════ -->
+    <section class="about section" id="about">
+      <div class="container">
+        <div class="section-header" data-animate>
+          <h2 class="section-title">About Me</h2>
+        </div>
+        <div class="about__bio" data-animate data-delay="100">
+          <p>Hey 👋 I’m Rudra Shah.</p>
+          <p class="about__bio--accent">I turn imagination into visuals and ideas into intelligent automation ⚡</p>
+          <p>I’m a disciplined creator blending design, development, and AI to build meaningful digital experiences.
+            From web-app development and UI/UX design to graphic design, video editing, 3D modeling, and AI-powered
+            systems — I focus on creating solutions that are not just beautiful, but functional and future-ready.</p>
+          <p>I believe technology should feel powerful, seamless, and smart.</p>
+          <p>Always open to collaborations, creative challenges, and ambitious ideas — let’s build something futuristic
+            together 🤝</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         CERTIFICATIONS & ACHIEVEMENTS
+    ═══════════════════════════════════════ -->
+    <section class="certs section" id="certs">
+      <div class="container">
+        <div class="certs__header" data-animate>
+          <h2 class="section-title">Professional Certifications</h2>
+          <p class="certs__sub">Validated expertise across industry-standard technologies and creative disciplines.</p>
+        </div>
+
+        <div class="certs__grid">
+          <div class="cert-card" data-animate data-delay="100">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/cs50_ai.png" alt="CS50 AI Certificate" class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="award"></i></div>
+            <div class="cert-card__content">
+              <h3>AI Mastery from Harvard University</h3>
+              <p>Mastering Advanced Neural Architectures and Computational Intelligence through the Elite CS50
+                Curriculum.</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-animate data-delay="200">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/product_matters.png" alt="IIT Guwahati Product Matters" class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="shield-check"></i></div>
+            <div class="cert-card__content">
+              <h3>Product Strategy 5.0 (IIT)</h3>
+              <p>Navigating the Complexity of Enterprise-Scale Roadmaps and Innovation Frameworks at IIT Guwahati.</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-animate data-delay="300">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/nvidia_badge.png" alt="Google Cloud & NVIDIA Badge" class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="zap"></i></div>
+            <div class="cert-card__content">
+              <h3>Google Cloud & NVIDIA Member</h3>
+              <p><span class="badge-status">Active Member</span> Collaborating on the Frontiers of Cloud-Accelerated AI
+                and High-Performance Computing.</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-animate data-delay="400">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/workshop.png" alt="Expert Workshop Session" class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="star"></i></div>
+            <div class="cert-card__content">
+              <h3>Invited by Microsoft - 1:1 Session</h3>
+              <p>Selective Strategic Engagement with Microsoft's Community Lead for Personalized Technical Architecture
+                Deep-Dives.</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-animate data-delay="500">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/nvidia_developer.png" alt="NVIDIA Developer Program" class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="cpu"></i></div>
+            <div class="cert-card__content">
+              <h3>NVIDIA Developer</h3>
+              <p>Official member of the NVIDIA Developer Program, focusing on AI and CUDA technologies.</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-animate data-delay="600">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/nvidia_webinar.png" alt="NVIDIA AI Webinar" class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="monitor-play"></i></div>
+            <div class="cert-card__content">
+              <h3>Invited by NVIDIA for AI Webinar</h3>
+              <p>Unlocking the Future of Generative Engines and GPU-Accelerated Workflows through Exclusive NVIDIA
+                Insights.</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-animate data-delay="700">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/bronze_badge.png" alt="Consistency Achievement" class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="medal"></i></div>
+            <div class="cert-card__content">
+              <h3>Bronze League in OpenAI Developer</h3>
+              <p>Maintaining a High-Velocity Development Streak within the OpenAI Ecosystem and Technical Frontier.</p>
+            </div>
+          </div>
+
+          <!-- New Certifications -->
+          <div class="cert-card" data-animate data-delay="800">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/google_developer_experts_follower.png" alt="Google Developer Experts Follower"
+                class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="globe"></i></div>
+            <div class="cert-card__content">
+              <h3>Google Developer Experts Follower</h3>
+              <p>Forging pathways within the prestigious Google Developer Experts ecosystem, staying at the forefront of
+                global tech evolution.</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-animate data-delay="900">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/firebase_studio_developer_community.png" alt="Google Firebase Studio Developer"
+                class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="flame"></i></div>
+            <div class="cert-card__content">
+              <h3>Google Firebase Studio Developer</h3>
+              <p>Architecting the future of real-time applications as an active contributor to the Firebase Studio Developer Community.</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-animate data-delay="1000">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/innovator_club_rudra_shah.png" alt="Innovator's Club Student"
+                class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="user-plus"></i></div>
+            <div class="cert-card__content">
+              <h3>15+ Badges on Google</h3>
+              <p>Achieving a significant milestone with 15+ specialized technical badges, reflecting a deep commitment
+                to mastering Google's ecosystem.</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-animate data-delay="1100">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/google_developer_experts_program.png" alt="Google Developer Experts Program"
+                class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="users"></i></div>
+            <div class="cert-card__content">
+              <h3>GDE Community Member</h3>
+              <p>Championing community-led innovation through dedicated alignment with Google's elite developer
+                mentorship framework.</p>
+            </div>
+          </div>
+
+          <div class="cert-card" data-animate data-delay="1200">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/google_maps_developer.png" alt="Google Maps Developer" class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="map-pin"></i></div>
+            <div class="cert-card__content">
+              <h3>Google Map Developer</h3>
+              <p>Expertly integrating geospatial data and location-based intelligence using the Google Maps Platform
+                SDKs.</p>
+            </div>
+          </div>
+
+          <!-- New NASA Entry -->
+          <div class="cert-card" data-animate data-delay="1300">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/NASA.jpeg" alt="NASA Artemis II Mission" class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="rocket"></i></div>
+            <div class="cert-card__content">
+              <h3>NASA Artemis II Mission Member</h3>
+              <p>Recognized with an official commemorative boarding pass for the historic Artemis II lunar mission, symbolizing a commitment to the new era of space exploration.</p>
+            </div>
+          </div>
+
+          <!-- New Google Invitation Entry -->
+          <div class="cert-card" data-animate data-delay="1400">
+            <div class="cert-card__glow"></div>
+            <div class="cert-card__image-container">
+              <img src="assets/certs/cmbined%20google.jpg" alt="Google Cloud AI Invitation" class="cert-card__img">
+            </div>
+            <div class="cert-card__icon"><i data-lucide="mail"></i></div>
+            <div class="cert-card__content">
+              <h3>Invited By Google Cloud</h3>
+              <p>Personally invited by Google Cloud for an exclusive session on Data, Analytics, and AI Agents, collaborating with industry leads on the frontiers of intelligence.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools Ticker (between About & Skills) -->
+    <div class="ticker ticker--tools" aria-hidden="true">
+      <div class="ticker__track ticker__track--reverse">
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Adobe Photoshop</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Adobe Illustrator</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Adobe After Effects</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Adobe Premiere Pro</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Figma</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Blender</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>HTML5</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>CSS3</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>JavaScript</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>TypeScript</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Python</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>React</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Next.js</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Tailwind CSS</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Bootstrap</span>
+        <!-- duplicated for seamless loop -->
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Adobe Photoshop</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Adobe Illustrator</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Adobe After Effects</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Adobe Premiere Pro</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Figma</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Blender</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>HTML5</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>CSS3</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>JavaScript</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>TypeScript</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Python</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>React</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Next.js</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Tailwind CSS</span>
+        <span class="ticker__item"><span class="ticker__dot ticker__dot--purple"></span>Bootstrap</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SKILLS SECTION
+    ═══════════════════════════════════════ -->
+    <section class="skills section" id="skills">
+      <div id="prism-canvas-container"></div>
+      <div class="container">
+        <div class="section-header" data-animate>
+          <h2 class="section-title">Skills</h2>
+        </div>
+        <ul class="ge-grid" id="ge-grid" data-animate data-delay="100">
+
+          <!-- 1. Design -->
+          <li class="ge-item">
+            <a href="design.html" class="ge-link-wrapper">
+              <div class="ge-card-outer">
+                <div class="glowing-effect" aria-hidden="true"></div>
+                <div class="ge-card-inner">
+                  <div class="ge-icon-wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+                      <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
+                      <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
+                      <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
+                      <path
+                        d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
+                    </svg>
+                  </div>
+                  <div class="ge-body">
+                    <h3>Design Expertise</h3>
+                    <p>Turning ideas into stunning visuals — from branding to immersive 3D worlds.</p>
+                    <div class="skills-list">
+                      <span class="skill-tag">Graphic Design</span>
+                      <span class="skill-tag">Video Editing</span>
+                      <span class="skill-tag">3D Modeling</span>
+                      <span class="skill-tag">UI-UX Design</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+
+          <!-- 2. Develop -->
+          <li class="ge-item">
+            <a href="development.html" class="ge-link-wrapper">
+              <div class="ge-card-outer">
+                <div class="glowing-effect" aria-hidden="true"></div>
+                <div class="ge-card-inner">
+                  <div class="ge-icon-wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <polyline points="16 18 22 12 16 6" />
+                      <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                  </div>
+                  <div class="ge-body">
+                    <h3>Development</h3>
+                    <p>From pixel-perfect frontends to scalable fullstack architectures and games.</p>
+                    <div class="skills-list">
+                      <span class="skill-tag">Web Development</span>
+                      <span class="skill-tag">App Development</span>
+                      <span class="skill-tag">Game Development</span>
+                      <span class="skill-tag">Fullstack</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+
+          <!-- 3. AI Section -->
+          <li class="ge-item">
+            <a href="ai-section.html" class="ge-link-wrapper">
+              <div class="ge-card-outer">
+                <div class="glowing-effect" aria-hidden="true"></div>
+                <div class="ge-card-inner">
+                  <div class="ge-icon-wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <path
+                        d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2" />
+                      <circle cx="7.5" cy="14.5" r="1.5" />
+                      <circle cx="16.5" cy="14.5" r="1.5" />
+                    </svg>
+                  </div>
+                  <div class="ge-body">
+                    <h3>AI Architect</h3>
+                    <p>Intelligent automation, AI-powered media, and cutting-edge chatbot experiences.</p>
+                    <div class="skills-list">
+                      <span class="skill-tag">AI Chatbot</span>
+                      <span class="skill-tag">Automation</span>
+                      <span class="skill-tag">AI Media</span>
+                      <span class="skill-tag">AI Services</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+
+          <!-- 4. Creative Engine -->
+          <li class="ge-item">
+            <a href="creative-engine.html" class="ge-link-wrapper">
+              <div class="ge-card-outer">
+                <div class="glowing-effect" aria-hidden="true"></div>
+                <div class="ge-card-inner">
+                  <div class="ge-icon-wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <polygon
+                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                  </div>
+                  <div class="ge-body">
+                    <h3>Creative Engine</h3>
+                    <p>Storytelling through motion, brand identity, and strategy that resonates.</p>
+                    <div class="skills-list">
+                      <span class="skill-tag">Visuals</span>
+                      <span class="skill-tag">Strategy</span>
+                      <span class="skill-tag">Motion</span>
+                      <span class="skill-tag">Branding</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         PROJECTS GRID
+    ═══════════════════════════════════════ -->
+    <section class="work section" id="work">
+      <div class="container">
+        <div class="work__header" data-animate>
+          <h2 class="section-title">Selected Work</h2>
+          <p class="work__sub">Explore my creative journey through two distinct lenses: aesthetic design and functional
+            development.</p>
+
+          <!-- Premium Tab Switcher -->
+          <div class="work__tabs-wrapper" data-animate data-delay="100">
+            <div class="work__tabs" id="work-tabs">
+              <button class="work__tab is-active" data-target="design">
+                <span class="neon-line neon-line--top"></span>
+                <span>Design</span>
+                <span class="neon-line neon-line--bottom"></span>
+              </button>
+              <button class="work__tab" data-target="development">
+                <span class="neon-line neon-line--top"></span>
+                <span>Development</span>
+                <span class="neon-line neon-line--bottom"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1st Part: Design Gallery -->
+        <div class="work__gallery is-active" id="gallery-design">
+          <div class="projects-grid">
+            <!-- 3D Interactive: AirPods Max -->
+            <article class="project-card project-card--portrait project-card--interactive" data-animate id="3d-1">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image">
+                  <spline-viewer
+                    data-url="https://prod.spline.design/nccrE2yk0PpebSD4/scene.splinecode"></spline-viewer>
+                </div>
+                <div class="project-card__overlay">
+                  <div class="btn btn--primary">Wake the Machine — Rotate Me →</div>
+                </div>
+              </div>
+              <div class="project-card__body">
+
+                <h3 class="project-card__title">AirPods Max — 3D Study</h3>
+                <p class="project-card__desc">Interactive product visualization exploring Apple's iconic design
+                  language.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">3D Design</span><span class="project-tag">Interactive</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 3D Interactive: Abstract Core -->
+            <article class="project-card project-card--portrait project-card--interactive" data-animate data-delay="100"
+              id="3d-2">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image">
+                  <spline-viewer
+                    data-url="https://prod.spline.design/WBNNeD8010PNKuD4/scene.splinecode"></spline-viewer>
+                </div>
+                <div class="project-card__overlay">
+                  <div class="btn btn--primary">Shape the Pulse — Reach In →</div>
+                </div>
+              </div>
+              <div class="project-card__body">
+
+                <h3 class="project-card__title">Futuristic Core — OS Concept</h3>
+                <p class="project-card__desc">A living, interactive 3D nucleus designed for a next-gen operating system.
+                </p>
+                <div class="project-card__tags">
+                  <span class="project-tag">UI/UX</span><span class="project-tag">Interactive</span><span
+                    class="project-tag">Spline</span>
+                </div>
+              </div>
+            </article>
+
+
+
+            <!-- 3D Interactive: Tech Relic -->
+            <article class="project-card project-card--portrait project-card--interactive" data-animate data-delay="200"
+              id="3d-4">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image">
+                  <spline-viewer
+                    data-url="https://prod.spline.design/VJ6fF4yRAF4i4CQP/scene.splinecode"></spline-viewer>
+                </div>
+                <div class="project-card__overlay">
+                  <div class="btn btn--primary">Dive into Detail →</div>
+                </div>
+              </div>
+              <div class="project-card__body">
+
+                <h3 class="project-card__title">Mechanical Relic — Study</h3>
+                <p class="project-card__desc">Intricate mechanical component visualization with real-time shadow
+                  casting.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Technical</span><span class="project-tag">Interactive</span><span
+                    class="project-tag">3D</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 3D Interactive: Prism Glow -->
+            <article class="project-card project-card--portrait project-card--interactive" data-animate data-delay="250"
+              id="3d-5">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image">
+                  <spline-viewer
+                    data-url="https://prod.spline.design/Y21djE1I7cj-HuXv/scene.splinecode"></spline-viewer>
+                </div>
+                <div class="project-card__overlay">
+                  <div class="btn btn--primary">Shift the Spectrum →</div>
+                </div>
+              </div>
+              <div class="project-card__body">
+
+                <h3 class="project-card__title">Prism Glow — Environment</h3>
+                <p class="project-card__desc">Atmospheric 3D lighting environment showing subsurface scattering.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Lighting</span><span class="project-tag">Interactive</span><span
+                    class="project-tag">VFX</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Design Project 1: Nike Ad -->
+            <article class="project-card project-card--portrait" data-animate id="design-1">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image" style="background: url('assets/work/nike.jpg') center no-repeat;"
+                  role="img" aria-label="Nike Air Ad Design">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Design →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+
+                <h3 class="project-card__title">Nike Air — Ad Concept</h3>
+                <p class="project-card__desc">Creative poster design focusing on dynamic composition and bold
+                  typography.
+                </p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Advertising</span><span class="project-tag">Branding</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Design Project 2: Heinz -->
+            <article class="project-card project-card--portrait" data-animate data-delay="100" id="design-2">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image" style="background: url('assets/work/heinz.jpg') center no-repeat;"
+                  role="img" aria-label="Heinz Ketchup Ad">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Design →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+
+                <h3 class="project-card__title">Heinz — Classic Ketchup</h3>
+                <p class="project-card__desc">Modern advertising layout with high-impact product photography.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Commercial</span><span class="project-tag">Layout</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Design Project 3: Sauvage -->
+            <article class="project-card project-card--portrait" data-animate data-delay="150" id="design-3">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image" style="background: url('assets/work/sauvage.jpg') center no-repeat;"
+                  role="img" aria-label="Dior Sauvage Ad">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Design →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+
+                <h3 class="project-card__title">Dior — Sauvage Campaign</h3>
+                <p class="project-card__desc">Elegant perfume advertisement showcasing luxury branding.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Luxury</span><span class="project-tag">Photography</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Design Project 4: Nescafe -->
+            <article class="project-card project-card--portrait" data-animate data-delay="200" id="design-4">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image" style="background: url('assets/work/nescafe.jpg') center no-repeat;"
+                  role="img" aria-label="Nescafe Gold Ad">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Design →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+
+                <h3 class="project-card__title">Nescafe — Gold Blend</h3>
+                <p class="project-card__desc">Rich visual storytelling for the premium coffee launch.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Branding</span><span class="project-tag">Social Media</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Design Project 5: Burger -->
+            <article class="project-card project-card--portrait" data-animate data-delay="250" id="design-5">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image" style="background: url('assets/work/burger.jpg') center no-repeat;"
+                  role="img" aria-label="Burger Feast Ad">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Design →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+
+                <h3 class="project-card__title">Burger Feast — Ad Concept</h3>
+                <p class="project-card__desc">Explosive food photography and layout for premium dining.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Food Ad</span><span class="project-tag">Graphic Design</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Design Project 6: Sauvage Parfum -->
+            <article class="project-card project-card--portrait" data-animate data-delay="300" id="design-6">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image"
+                  style="background: url('assets/work/sauvage-parfum.jpg') center no-repeat;" role="img"
+                  aria-label="Sauvage Parfum Ad">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Design →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+
+                <h3 class="project-card__title">Dior — Sauvage Parfum</h3>
+                <p class="project-card__desc">Dramatic smoke-infused commercial design for the iconic fragrance.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Luxury</span><span class="project-tag">Advertising</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Design Project 7: Nescafe Red -->
+            <article class="project-card project-card--portrait" data-animate data-delay="350" id="design-7">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image"
+                  style="background: url('assets/work/nescafe-red.jpg') center no-repeat;" role="img"
+                  aria-label="Nescafe Red Mug Ad">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Design →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+
+                <h3 class="project-card__title">Nescafe — Red Mug</h3>
+                <p class="project-card__desc">Invigorating lifestyle campaign highlighting the morning ritual.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Commercial</span><span class="project-tag">Photography</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Design Project 8: Blueberry Energy -->
+            <article class="project-card project-card--portrait" data-animate data-delay="400" id="design-8">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image" style="background: url('assets/work/blueberry.jpg') center no-repeat;"
+                  role="img" aria-label="Blueberry Drink Ad">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Design →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+
+                <h3 class="project-card__title">Blueberry — Energy Drink</h3>
+                <p class="project-card__desc">Vibrant and energetic product showcase with dynamic liquid elements.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Creative</span><span class="project-tag">Marketing</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Design Project 9: Burger Concept -->
+            <article class="project-card project-card--portrait" data-animate data-delay="450" id="design-9">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image"
+                  style="background: url('assets/work/burger-concept.jpg') center no-repeat;" role="img"
+                  aria-label="Burger Special Ad">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Design →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+
+                <h3 class="project-card__title">Burger — Special Concept</h3>
+                <p class="project-card__desc">Bold vertical layout for a premium gourmet burger campaign.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Advertising</span><span class="project-tag">Food Design</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Design Project 11: Nescafe Gold Alt -->
+            <article class="project-card project-card--portrait" data-animate data-delay="550" id="design-11">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image"
+                  style="background: url('assets/work/nescafe-gold-alt.jpg') center no-repeat;" role="img"
+                  aria-label="Nescafe Gold Variant Ad">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Design →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+                <h3 class="project-card__title">Nescafe Gold — Refined</h3>
+                <p class="project-card__desc">A minimalistic variant of the Gold Blend campaign emphasizing elegance.
+                </p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Branding</span><span class="project-tag">Minimalism</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+
+
+        <!-- 2nd Part: Development Gallery (Hidden by default) -->
+        <div class="work__gallery" id="gallery-development">
+          <div class="projects-grid">
+            <!-- Dev Project 1: Keshavam Restaurant (Featured) -->
+            <article class="project-card project-card--featured" data-animate id="dev-1">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image" style="background: url('assets/work/keshva.png.png') center/cover no-repeat; height: 260px;" role="img" aria-label="Keshavam Restaurant Project">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="https://spontaneous-jelly-337ba5.netlify.app/" target="_blank" class="btn btn--primary">Launch Live Site →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+                <h3 class="project-card__title">Keshavam — Restaurant & Banquet</h3>
+                <p class="project-card__desc">Full-scale digital presence for a luxury dining and event venue, featuring real-time menu browsing and capacity booking.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">React</span><span class="project-tag">Vite</span><span class="project-tag">Animation</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Dev Project 2: Parth FMCG -->
+            <article class="project-card" data-animate data-delay="100" id="dev-2">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image" style="background: url('assets/work/parth.png.png') center/cover no-repeat; height: 260px;" role="img" aria-label="Parth FMCG Project">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="https://parth-nu.vercel.app/" target="_blank" class="btn btn--primary">Launch Live Site →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+                <h3 class="project-card__title">Parth — FMCG Distribution Hub</h3>
+                <p class="project-card__desc">Premium FMCG distribution platform with dynamic daily pricing for grains and flours, built for Vinayak Sales Agency.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Next.js</span><span class="project-tag">Supabase</span><span class="project-tag">Real-time</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Dev Project 3: Hotelia -->
+            <article class="project-card" data-animate data-delay="150" id="dev-3">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image"
+                  style="background: url('assets/work/hotel-booking.png') center no-repeat;" role="img"
+                  aria-label="Hotelia Booking App preview">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Codebase →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+                <h3 class="project-card__title">Hotelia — Hotel Booking Ecosystem</h3>
+                <p class="project-card__desc">A comprehensive mobile booking platform with multi-vendor management,
+                  real-time inventory tracking, and secure payment integration.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">React Native</span><span class="project-tag">Node.js</span>
+                  <span class="project-tag">Stripe</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Dev Project 4: StudyMEDIC -->
+            <article class="project-card" data-animate data-delay="200" id="dev-4">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image" style="background: url('assets/work/studymedic.jpg') center no-repeat;"
+                  role="img" aria-label="StudyMEDIC App preview">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Codebase →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+                <h3 class="project-card__title">StudyMEDIC — EdTech Platform</h3>
+                <p class="project-card__desc">Medical education app featuring interactive course modules, question
+                  banks, and live webinar streaming for professionals.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">Flutter</span><span class="project-tag">Firebase</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Dev Project 5: Munchie -->
+            <article class="project-card" data-animate data-delay="250" id="dev-5">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image"
+                  style="background: url('assets/work/food-delivery.png') center no-repeat;" role="img"
+                  aria-label="Munchie Food Delivery preview">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Codebase →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+                <h3 class="project-card__title">Munchie — Food Delivery System</h3>
+                <p class="project-card__desc">Dual-interface delivery application with real-time GPS tracking and
+                  dynamic restaurant menu management.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">TypeScript</span><span class="project-tag">Socket.io</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Dev Project 6: TryCam Pro -->
+            <article class="project-card" data-animate data-delay="300" id="dev-6">
+              <div class="project-card__glare" aria-hidden="true"></div>
+              <div class="project-card__image-wrap">
+                <div class="project-card__image" style="background: url('assets/work/trycam.png') center no-repeat;"
+                  role="img" aria-label="TryCam Pro preview">
+                </div>
+                <div class="project-card__overlay">
+                  <a href="#" class="btn btn--primary">View Codebase →</a>
+                </div>
+              </div>
+              <div class="project-card__body">
+                <h3 class="project-card__title">TryCam Pro — Vision Engine</h3>
+                <p class="project-card__desc">A high-performance photography utility with custom-built image filters and
+                  real-time processing pipelines.</p>
+                <div class="project-card__tags">
+                  <span class="project-tag">SwiftUI</span><span class="project-tag">CoreML</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         INQUIRY SECTION
+    ═══════════════════════════════════════ -->
+    <section class="inquiry section" id="inquiry">
+      <div class="container">
+        <div class="inquiry__header" data-animate>
+          <h2 class="section-title">Start a Conversation</h2>
+          <p class="inquiry__sub">Have a vision for a project? Let's discuss how we can bring it to life with precision
+            and creativity.</p>
+        </div>
+
+        <div class="inquiry__grid">
+          <!-- Form Side -->
+          <div class="inquiry__form-card" data-animate data-delay="100">
+            <div class="form-glow"></div>
+            <form action="https://formsubmit.co/shahrudra53@gmail.com" method="POST" class="inquiry-form"
+              id="inquiry-form">
+              <!-- _subject for better email organization -->
+              <input type="hidden" name="_subject" value="New Professional Inquiry | Rudra Shah">
+              <!-- _template for cleaner email layout -->
+              <input type="hidden" name="_template" value="table">
+              <!-- Anti-spam "honey" field -->
+              <input type="hidden" name="_honey" style="display:none">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Full Name</label>
+                  <div class="input-wrap">
+                    <input type="text" id="name" name="name" placeholder="John Doe" required />
+                    <span class="input-line"></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <div class="input-wrap">
+                    <input type="email" id="email" name="email" placeholder="john@example.com" required />
+                    <span class="input-line"></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <div class="input-wrap">
+                    <input type="tel" id="phone" name="phone" placeholder="+91 00000 00000" />
+                    <span class="input-line"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>What service are you inquiring about?</label>
+                <div class="service-selector">
+                  <input type="hidden" name="service" id="selected-service" value="design">
+                  <div class="service-chip is-active" data-value="design" tabindex="0">
+                    <i data-lucide="layout"></i>
+                    <span>Brand & UX Design</span>
+                  </div>
+                  <div class="service-chip" data-value="development" tabindex="0">
+                    <i data-lucide="terminal"></i>
+                    <span>Software Engineering</span>
+                  </div>
+                  <div class="service-chip" data-value="ai" tabindex="0">
+                    <i data-lucide="brain"></i>
+                    <span>Neural / AI Systems</span>
+                  </div>
+                  <div class="service-chip" data-value="other" tabindex="0">
+                    <i data-lucide="help-circle"></i>
+                    <span>Specialized Inquiry</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Your Message</label>
+                <div class="input-wrap">
+                  <textarea id="message" name="message" rows="5" placeholder="Tell me about your vision..."
+                    required></textarea>
+                  <span class="input-line"></span>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--lg inquiry-submit">
+                <span>Send Message</span>
+                <i data-lucide="send" width="18" height="18"></i>
+              </button>
+            </form>
+          </div>
+
+          <!-- Info Side -->
+          <div class="inquiry__info" data-animate data-delay="200">
+            <div class="info-item">
+              <div class="info-icon"><i data-lucide="clock"></i></div>
+              <div class="info-text">
+                <h4>Response Time</h4>
+                <p>Expect a response within 24-48 business hours.</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon"><i data-lucide="map-pin"></i></div>
+              <div class="info-text">
+                <h4>Location</h4>
+                <p>Rajkot, Gujarat, India — Available Globally.</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon"><i data-lucide="sparkles"></i></div>
+              <div class="info-text">
+                <h4>Custom Solutions</h4>
+                <p>Every proposal is tailored specifically to your project's goals.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER / CONTACT
+  ═══════════════════════════════════════ -->
+  <footer class="contact section" id="contact">
+    <!-- Contact section background -->
+    <div id="ethereal-contact" class="ethereal-bg ethereal-bg--contact" aria-hidden="true">
+      <div class="ethereal-inner" id="ethereal-inner-contact">
+        <div class="ethereal-mask ethereal-mask--teal"></div>
+      </div>
+    </div>
+    <div class="blob blob--3" aria-hidden="true"></div>
+    <div class="container contact__inner" data-animate style="padding-top: 4rem;">
+      <h2 class="contact__headline">Let's Build Something Legendary</h2>
+      <p class="contact__sub">Have a project in mind? I'd love to hear about it.<br />Drop me a line and let's create
+        something great.</p>
+      <div class="contact__links">
+        <a href="mailto:shahrudra53@gmail.com" class="btn btn--primary btn--lg contact__email" id="contact-email-btn">
+          <span>shahrudra53@gmail.com</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a href="tel:+918488887725" class="btn btn--ghost btn--lg contact__phone" id="contact-phone-btn">
+          <i data-lucide="phone" width="18" height="18"></i>
+          <span>+91 8488887725</span>
+        </a>
+      </div>
+      <nav class="social-links" aria-label="Social media links">
+        <a href="https://www.linkedin.com/in/--shah--rudra--398--/" target="_blank" rel="noopener noreferrer"
+          class="social-link" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
+            aria-hidden="true">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+            <rect x="2" y="9" width="4" height="12" />
+            <circle cx="4" cy="4" r="2" />
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://x.com/RudraShah398" target="_blank" rel="noopener noreferrer" class="social-link"
+          aria-label="X (Twitter)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"
+            aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+          <span>X</span>
+        </a>
+      </nav>
+      <p class="contact__copy">&copy; 2026 Rudra Shah. Crafted with care.</p>
+    </div>
+  </footer>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ogl@1.0.11/dist/ogl.umd.js"></script>
+  <script src="script.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+
+</html>
