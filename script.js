@@ -1437,10 +1437,9 @@ window.addEventListener('load', () => {
 
     const mount = document.getElementById('laser-flow-mount');
     if (!mount) {
-        console.warn('[LaserFlow] Mount not found');
+        // Not on the homepage, skip laser flow entirely
         return;
     }
-    console.log('[LaserFlow] Initializing...');
 
     const CFG = {
         wispDensity: 1.0,
