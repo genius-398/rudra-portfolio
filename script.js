@@ -1961,6 +1961,11 @@ void main(){
                     setTimeout(() => {
                         // Double check visibility before loading
                         if (!viewer.getAttribute('url') && gallery.classList.contains('is-active')) {
+                            // Show loader immediately
+                            const loader = viewer.parentElement.querySelector('.spline-loader');
+                            if (loader) {
+                                loader.classList.remove('is-hidden');
+                            }
                             viewer.setAttribute('url', url);
                             viewer.setAttribute('hint', 'performance');
                         }
@@ -1992,6 +1997,19 @@ void main(){
         const viewers = document.querySelectorAll('spline-viewer');
         viewers.forEach(viewer => {
             lazyObserver.observe(viewer);
+
+            // Add Custom Loader Element if not exists
+            if (!viewer.parentElement.querySelector('.spline-loader')) {
+                const loader = document.createElement('div');
+                loader.className = 'spline-loader';
+                loader.innerHTML = '<div class="spline-spinner"></div><span class="spline-loader-text">Loading 3D Model...</span>';
+                viewer.parentElement.appendChild(loader);
+
+                // Listen for load event to hide loader
+                viewer.addEventListener('load', () => {
+                   loader.classList.add('is-hidden');
+                });
+            }
 
             if (viewer.shadowRoot && !viewer.shadowRoot.querySelector('.logo-hidden-style')) {
                 const s = document.createElement('style');
