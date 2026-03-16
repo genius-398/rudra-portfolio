@@ -2005,10 +2005,20 @@ void main(){
                 loader.innerHTML = '<div class="spline-spinner"></div><span class="spline-loader-text">Loading 3D Model...</span>';
                 viewer.parentElement.appendChild(loader);
 
-                // Listen for load event to hide loader
-                viewer.addEventListener('load', () => {
+                // For Spline Viewer, the safest way to detect load is an interval check or custom event.
+                // We'll listen for the specific 'load' event fired by the web component
+                viewer.addEventListener('load-complete', () => {
                    loader.classList.add('is-hidden');
                 });
+                // Fallback: also listen to standard load just in case
+                viewer.addEventListener('load', () => {
+                    loader.classList.add('is-hidden');
+                });
+                
+                // Backup timeout just in case the event fails to fire (prevents infinite loading)
+                setTimeout(() => {
+                    if(loader) loader.classList.add('is-hidden');
+                }, 8000); 
             }
 
             if (viewer.shadowRoot && !viewer.shadowRoot.querySelector('.logo-hidden-style')) {
