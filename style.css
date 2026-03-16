@@ -2961,10 +2961,6 @@ spline-viewer::part(watermark) {
     .contact__email {
         font-size: 0.85rem;
     }
-
-    .ticker {
-        display: none;
-    }
 }
 
 /* Tablet */
