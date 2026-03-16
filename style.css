@@ -2975,6 +2975,18 @@ spline-viewer::part(watermark) {
         grid-template-columns: 1fr;
     }
 
+    /* Fix Tabs overflow on mobile */
+    .work__tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .work__tab {
+        padding: 0.6rem 1.25rem;
+        font-size: 0.8rem;
+    }
+
     .project-card--featured {
         grid-column: auto;
     }
