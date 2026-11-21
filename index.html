@@ -34,7 +34,6 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="ProfileCard.css" />
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.72/build/spline-viewer.js"></script>
 </head>
 
 <body>
@@ -87,26 +86,26 @@
       <ul class="anime-nav__list">
         <li class="anime-nav__item">
           <a href="#hero" class="anime-nav__link is-active" data-nav-name="Home">
-            <span>Home</span>
             <i data-lucide="home" aria-hidden="true"></i>
+            <span>Home</span>
           </a>
         </li>
         <li class="anime-nav__item">
           <a href="#about" class="anime-nav__link" data-nav-name="About">
-            <span>About</span>
             <i data-lucide="user" aria-hidden="true"></i>
+            <span>About</span>
           </a>
         </li>
         <li class="anime-nav__item">
           <a href="#work" class="anime-nav__link" data-nav-name="Work">
-            <span>Work</span>
             <i data-lucide="layout" aria-hidden="true"></i>
+            <span>Work</span>
           </a>
         </li>
         <li class="anime-nav__item">
           <a href="#contact" class="anime-nav__link" data-nav-name="Contact">
-            <span>Contact</span>
             <i data-lucide="mail" aria-hidden="true"></i>
+            <span>Contact</span>
           </a>
         </li>
       </ul>
@@ -143,13 +142,21 @@
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
-            <a href="#" class="btn btn--ghost btn--lg" id="download-resume-btn">
+            <a href="assets/docs/Rudra_Shah_Resume.pdf" download="Rudra_Shah_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--lg" id="download-resume-btn">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                 aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
               </svg>
               <span>Download Resume</span>
+            </a>
+            <a href="assets/docs/Rudra_Shah_Creative_Portfolio.pdf" download="Rudra_Shah_Creative_Portfolio.pdf" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--lg" id="download-portfolio-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+              </svg>
+              <span>Download Portfolio</span>
             </a>
           </div>
           <div class="hero__stats" role="list">
@@ -662,6 +669,12 @@
           <h2 class="section-title">Selected Work</h2>
           <p class="work__sub">Explore my creative journey through two distinct lenses: aesthetic design and functional
             development.</p>
+          <div style="margin-top: 1.25rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <a href="assets/docs/Rudra_Shah_Creative_Portfolio.pdf" download="Rudra_Shah_Creative_Portfolio.pdf" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
+              <i data-lucide="download" width="16" height="16"></i>
+              <span>Download Creative Portfolio (PDF)</span>
+            </a>
+          </div>
 
           <!-- Premium Tab Switcher -->
           <div class="work__tabs-wrapper" data-animate data-delay="100">
@@ -688,105 +701,6 @@
         <!-- 1st Part: Design Gallery -->
         <div class="work__gallery is-active" id="gallery-design">
           <div class="projects-grid">
-            <!-- 3D Interactive: AirPods Max -->
-            <article class="project-card project-card--portrait project-card--interactive" data-animate id="3d-1">
-              <div class="project-card__glare" aria-hidden="true"></div>
-              <div class="project-card__image-wrap">
-                <div class="project-card__image">
-                  <spline-viewer
-                    data-url="https://prod.spline.design/nccrE2yk0PpebSD4/scene.splinecode"></spline-viewer>
-                </div>
-                <div class="project-card__overlay">
-                  <div class="btn btn--primary">Wake the Machine — Rotate Me →</div>
-                </div>
-              </div>
-              <div class="project-card__body">
-
-                <h3 class="project-card__title">AirPods Max — 3D Study</h3>
-                <p class="project-card__desc">Interactive product visualization exploring Apple's iconic design
-                  language.</p>
-                <div class="project-card__tags">
-                  <span class="project-tag">3D Design</span><span class="project-tag">Interactive</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- 3D Interactive: Abstract Core -->
-            <article class="project-card project-card--portrait project-card--interactive" data-animate data-delay="100"
-              id="3d-2">
-              <div class="project-card__glare" aria-hidden="true"></div>
-              <div class="project-card__image-wrap">
-                <div class="project-card__image">
-                  <spline-viewer
-                    data-url="https://prod.spline.design/WBNNeD8010PNKuD4/scene.splinecode"></spline-viewer>
-                </div>
-                <div class="project-card__overlay">
-                  <div class="btn btn--primary">Shape the Pulse — Reach In →</div>
-                </div>
-              </div>
-              <div class="project-card__body">
-
-                <h3 class="project-card__title">Futuristic Core — OS Concept</h3>
-                <p class="project-card__desc">A living, interactive 3D nucleus designed for a next-gen operating system.
-                </p>
-                <div class="project-card__tags">
-                  <span class="project-tag">UI/UX</span><span class="project-tag">Interactive</span><span
-                    class="project-tag">Spline</span>
-                </div>
-              </div>
-            </article>
-
-
-
-            <!-- 3D Interactive: Tech Relic -->
-            <article class="project-card project-card--portrait project-card--interactive" data-animate data-delay="200"
-              id="3d-4">
-              <div class="project-card__glare" aria-hidden="true"></div>
-              <div class="project-card__image-wrap">
-                <div class="project-card__image">
-                  <spline-viewer
-                    data-url="https://prod.spline.design/VJ6fF4yRAF4i4CQP/scene.splinecode"></spline-viewer>
-                </div>
-                <div class="project-card__overlay">
-                  <div class="btn btn--primary">Dive into Detail →</div>
-                </div>
-              </div>
-              <div class="project-card__body">
-
-                <h3 class="project-card__title">Mechanical Relic — Study</h3>
-                <p class="project-card__desc">Intricate mechanical component visualization with real-time shadow
-                  casting.</p>
-                <div class="project-card__tags">
-                  <span class="project-tag">Technical</span><span class="project-tag">Interactive</span><span
-                    class="project-tag">3D</span>
-                </div>
-              </div>
-            </article>
-
-            <!-- 3D Interactive: Prism Glow -->
-            <article class="project-card project-card--portrait project-card--interactive" data-animate data-delay="250"
-              id="3d-5">
-              <div class="project-card__glare" aria-hidden="true"></div>
-              <div class="project-card__image-wrap">
-                <div class="project-card__image">
-                  <spline-viewer
-                    data-url="https://prod.spline.design/Y21djE1I7cj-HuXv/scene.splinecode"></spline-viewer>
-                </div>
-                <div class="project-card__overlay">
-                  <div class="btn btn--primary">Shift the Spectrum →</div>
-                </div>
-              </div>
-              <div class="project-card__body">
-
-                <h3 class="project-card__title">Prism Glow — Environment</h3>
-                <p class="project-card__desc">Atmospheric 3D lighting environment showing subsurface scattering.</p>
-                <div class="project-card__tags">
-                  <span class="project-tag">Lighting</span><span class="project-tag">Interactive</span><span
-                    class="project-tag">VFX</span>
-                </div>
-              </div>
-            </article>
-
             <!-- Design Project 1: Nike Ad -->
             <article class="project-card project-card--portrait" data-animate id="design-1">
               <div class="project-card__glare" aria-hidden="true"></div>
@@ -1342,9 +1256,19 @@
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </a>
-        <a href="tel:+918488887725" class="btn btn--ghost btn--lg contact__phone" id="contact-phone-btn">
+        <a href="tel:+919213558935" class="btn btn--ghost btn--lg contact__phone" id="contact-phone-btn">
           <i data-lucide="phone" width="18" height="18"></i>
-          <span>+91 8488887725</span>
+          <span>+91 9213558935</span>
+        </a>
+      </div>
+      <div class="contact__downloads" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+        <a href="assets/docs/Rudra_Shah_Resume.pdf" download="Rudra_Shah_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+          <i data-lucide="file-text" width="18" height="18"></i>
+          <span>Download Resume (PDF)</span>
+        </a>
+        <a href="assets/docs/Rudra_Shah_Creative_Portfolio.pdf" download="Rudra_Shah_Creative_Portfolio.pdf" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+          <i data-lucide="folder-down" width="18" height="18"></i>
+          <span>Download Creative Portfolio (PDF)</span>
         </a>
       </div>
       <nav class="social-links" aria-label="Social media links">

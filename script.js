@@ -1,5 +1,14 @@
 'use strict';
 
+/* Global Scroll Optimization State */
+let isScrolling = false;
+let scrollEndTimer;
+window.addEventListener('scroll', () => {
+    isScrolling = true;
+    clearTimeout(scrollEndTimer);
+    scrollEndTimer = setTimeout(() => { isScrolling = false; }, 100);
+}, { passive: true });
+
 /* ═══════════════════════════════════════════════════════════
    1. PARTICLE CANVAS BACKGROUND
 ═══════════════════════════════════════════════════════════ */
@@ -18,7 +27,7 @@
     const ctx = canvas.getContext('2d');
 
     let W, H, particles = [];
-    const COUNT = 30; // Aggressively reduced for max smoothness
+    const COUNT = 24; // Lightweight for butter-smooth 60fps
     const COLORS = ['rgba(79,172,254,', 'rgba(167,139,250,', 'rgba(118,228,247,'];
 
     function resize() {
@@ -38,7 +47,6 @@
             this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
         }
         update() {
-            // Mouse repulsion
             const dx = this.x - mouse.x;
             const dy = this.y - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
@@ -64,30 +72,34 @@
         particles = Array.from({ length: COUNT }, () => new Particle());
     }
 
-    // Draw connecting lines removed as per request to declutter the header area
-    function drawConnections() {
-        // No-op
-    }
-
-    let isScrolling = false;
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-        isScrolling = true;
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => { isScrolling = false; }, 150);
-    }, { passive: true });
+    let isParticleVisible = true;
+    let particleRaf = null;
 
     function loop() {
-        ctx.clearRect(0, 0, W, H);
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(loop);
+        if (!isParticleVisible) {
+            particleRaf = null;
+            return;
+        }
+        if (!isScrolling) {
+            ctx.clearRect(0, 0, W, H);
+            particles.forEach(p => { p.update(); p.draw(); });
+        }
+        particleRaf = requestAnimationFrame(loop);
     }
 
-    window.addEventListener('resize', () => { resize(); init(); });
+    const pObserver = new IntersectionObserver(([entry]) => {
+        isParticleVisible = entry.isIntersecting;
+        if (isParticleVisible && !particleRaf) {
+            particleRaf = requestAnimationFrame(loop);
+        }
+    }, { threshold: 0.01 });
+    pObserver.observe(canvas);
+
+    window.addEventListener('resize', () => { resize(); init(); }, { passive: true });
 
     resize();
     init();
-    loop();
+    particleRaf = requestAnimationFrame(loop);
 })();
 
 /* ═══════════════════════════════════════════════════════════
@@ -545,20 +557,34 @@
     }
 
     let lastTime = Date.now(), colorTimer = 0, frameCount = 0;
+    let activeFrames = 0;
+    let isSimRunning = false;
     // Priority mode: Pause background fluid when Work Gallery is visible to save GPU
     let isWorkVisible = false, isVisible = true;
-    const workObserver = new IntersectionObserver(([e]) => { isWorkVisible = e.isIntersecting; }, { threshold: 0.1 });
+    const workObserver = new IntersectionObserver(([e]) => {
+        isWorkVisible = e.isIntersecting;
+        if (isWorkVisible) isSimRunning = false;
+    }, { threshold: 0.1 });
     const workSection = document.getElementById('work');
     if (workSection) workObserver.observe(workSection);
 
     const mainObserver = new IntersectionObserver(([e]) => {
-        const wasVisible = isVisible;
         isVisible = e.isIntersecting;
-        if (isVisible && !wasVisible) { lastTime = Date.now(); requestAnimationFrame(update); }
+        if (isVisible && activeFrames > 0 && !isSimRunning) {
+            isSimRunning = true;
+            lastTime = Date.now();
+            requestAnimationFrame(update);
+        }
     }, { threshold: 0.05 });
     mainObserver.observe(canvas);
 
     function update() {
+        if (isScrolling || !isVisible || isWorkVisible || activeFrames <= 0) {
+            isSimRunning = false;
+            return;
+        }
+
+        activeFrames--;
         frameCount++;
         let dt = Math.min((Date.now() - lastTime) / 1000, 0.016); lastTime = Date.now();
         gl.disable(gl.BLEND);
@@ -622,53 +648,62 @@
         gl.uniform1i(displayMaterial.active.uniforms.uTexture, dye.read.attach(0));
         blit(null);
 
-        if (isVisible && !is3DHovered && !isWorkVisible) {
-            requestAnimationFrame(update);
-        }
-    }        // Interaction-driven Prioritization: Pause fluid when 3D is hovered
-    const interactiveCards = document.querySelectorAll('.project-card--interactive');
-    let is3DHovered = false;
-    interactiveCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            is3DHovered = true;
-            document.body.classList.add('is-interacting-3d');
-        });
-        card.addEventListener('mouseleave', () => {
-            is3DHovered = false;
-            document.body.classList.remove('is-interacting-3d');
-        });
-    });
+        requestAnimationFrame(update);
+    }
 
     const core = document.getElementById('cursor-core');
+    let mouseX = -999, mouseY = -999;
+    let cursorX = -999, cursorY = -999;
+    let cursorRaf = null;
 
-    // Zero-lag Direct positioning
-    function updateCursorPosition(x, y) {
-        if (core) {
-            core.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+    // Smooth Hardware-Accelerated Lerp Follower (Zero-Jank, Zero-Lag)
+    function renderCursor() {
+        if (!core) return;
+        cursorX += (mouseX - cursorX) * 0.35;
+        cursorY += (mouseY - cursorY) * 0.35;
+        core.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+
+        if (Math.abs(mouseX - cursorX) > 0.5 || Math.abs(mouseY - cursorY) > 0.5) {
+            cursorRaf = requestAnimationFrame(renderCursor);
+        } else {
+            cursorRaf = null;
         }
     }
 
     function updatePointer(e) {
-        let p = pointers[0];
         const x = e.clientX || (e.touches && e.touches[0].clientX);
         const y = e.clientY || (e.touches && e.touches[0].clientY);
 
         if (x === undefined || y === undefined) return;
 
-        // INSTANT CURSOR MOVE
-        updateCursorPosition(x, y);
+        mouseX = x;
+        mouseY = y;
+        if (cursorX < -500) { cursorX = x; cursorY = y; }
+
+        if (!cursorRaf) {
+            cursorRaf = requestAnimationFrame(renderCursor);
+        }
 
         if (core) {
             core.style.opacity = e.type.startsWith('touch') ? '0' : '1';
         }
 
+        if (isScrolling || !isVisible || isWorkVisible) return;
+
+        let p = pointers[0];
         p.prevTexcoordX = p.texcoordX; p.prevTexcoordY = p.texcoordY;
         p.texcoordX = x / canvas.width; p.texcoordY = 1 - y / canvas.height;
         p.deltaX = p.texcoordX - p.prevTexcoordX; p.deltaY = p.texcoordY - p.prevTexcoordY;
 
-        if (!is3DHovered && isVisible && (Math.abs(p.deltaX) > 0 || Math.abs(p.deltaY) > 0)) {
+        if (Math.abs(p.deltaX) > 0.0005 || Math.abs(p.deltaY) > 0.0005) {
             p.color = generateColor();
             splatPointer(p);
+            activeFrames = 60;
+            if (!isSimRunning) {
+                isSimRunning = true;
+                lastTime = Date.now();
+                requestAnimationFrame(update);
+            }
         }
     }
 
@@ -863,27 +898,37 @@ void main() {
         window.addEventListener('resize', updatePlacement);
         updatePlacement();
 
-        // ── Mouse tracking ────────────────────────────────────
+        // ── Mouse tracking (Cached Rect, Zero Layout Thrashing) ──
         let rawMouse = { x: 0.5, y: 0.5 };
         let smoothMouse = { x: 0.5, y: 0.5 };
-        const onMouseMove = (e) => {
-            const rect = container.getBoundingClientRect();
-            rawMouse.x = (e.clientX - rect.left) / rect.width;
-            rawMouse.y = (e.clientY - rect.top) / rect.height;
+        let cachedContainerRect = null;
+        const updateContainerRect = () => {
+            if (container) cachedContainerRect = container.getBoundingClientRect();
         };
-        if (cfg.followMouse) window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('resize', updateContainerRect, { passive: true });
+        window.addEventListener('scroll', updateContainerRect, { passive: true });
+        updateContainerRect();
 
-        // ── Render loop ───────────────────────────────────────
+        const onMouseMove = (e) => {
+            if (!cachedContainerRect) updateContainerRect();
+            rawMouse.x = (e.clientX - cachedContainerRect.left) / (cachedContainerRect.width || 1);
+            rawMouse.y = (e.clientY - cachedContainerRect.top) / (cachedContainerRect.height || 1);
+        };
+        if (cfg.followMouse) window.addEventListener('mousemove', onMouseMove, { passive: true });
+
+        // ── Render loop (Yields GPU during scroll) ─────────────
         let raf = 0;
         const loop = (t) => {
-            uniforms.iTime.value = t * 0.001;
-            if (cfg.followMouse) {
-                const sm = 0.92;
-                smoothMouse.x = smoothMouse.x * sm + rawMouse.x * (1 - sm);
-                smoothMouse.y = smoothMouse.y * sm + rawMouse.y * (1 - sm);
-                uniforms.mousePos.value = [smoothMouse.x, smoothMouse.y];
+            if (!isScrolling) {
+                uniforms.iTime.value = t * 0.001;
+                if (cfg.followMouse) {
+                    const sm = 0.92;
+                    smoothMouse.x = smoothMouse.x * sm + rawMouse.x * (1 - sm);
+                    smoothMouse.y = smoothMouse.y * sm + rawMouse.y * (1 - sm);
+                    uniforms.mousePos.value = [smoothMouse.x, smoothMouse.y];
+                }
+                renderer.render({ scene: mesh });
             }
-            renderer.render({ scene: mesh });
             raf = requestAnimationFrame(loop);
         };
 
@@ -934,9 +979,12 @@ void main() {
         let lastX = 0;
         let lastY = 0;
 
-        // Smooth angle animation (replaces motion/react animate with ease [0.16,1,0.3,1])
+        let cachedOuterRect = null;
+        const updateOuterRect = () => { if (outer) cachedOuterRect = outer.getBoundingClientRect(); };
+        window.addEventListener('resize', updateOuterRect, { passive: true });
+
+        // Smooth angle animation
         const animateAngle = () => {
-            // Shortest angular path — handles 359°→1° correctly
             let diff = ((tgtAngle - curAngle + 180) % 360) - 180;
             if (diff < -180) diff += 360;
             curAngle += diff * LERP_SPEED;
@@ -951,11 +999,13 @@ void main() {
             }
         };
 
-        // Core logic — mirrors GlowingEffect.handleMove
+        // Core logic — throttled and cached
         const handleMove = (e) => {
+            if (isScrolling) return;
             if (e) { lastX = e.x ?? e.clientX; lastY = e.y ?? e.clientY; }
 
-            const rect = outer.getBoundingClientRect();
+            if (!cachedOuterRect) updateOuterRect();
+            const rect = cachedOuterRect;
             const centerX = rect.left + rect.width * 0.5;
             const centerY = rect.top + rect.height * 0.5;
 
@@ -976,22 +1026,24 @@ void main() {
             outer.style.setProperty('--active', isActive ? '1' : '0');
             if (!isActive) return;
 
-            // Angle: 0° at top, clockwise (matches atan2 + 90° offset in source)
+            // Angle: 0° at top, clockwise
             tgtAngle = (180 * Math.atan2(lastY - centerY, lastX - centerX)) / Math.PI + 90;
             if (!rafId) rafId = requestAnimationFrame(animateAngle);
         };
 
         window.addEventListener('pointermove', handleMove, { passive: true });
-        window.addEventListener('scroll', () => handleMove(null), { passive: true });
 
         // SpotlightCard: inner radial glow follows mouse inside the card
-        // Mirrors React handleMouseMove: x = clientX - rect.left, y = clientY - rect.top
         if (inner) {
+            let innerRect = null;
+            inner.addEventListener('mouseenter', () => { innerRect = inner.getBoundingClientRect(); }, { passive: true });
             inner.addEventListener('pointermove', (e) => {
-                const r = inner.getBoundingClientRect();
-                inner.style.setProperty('--mouse-x', (e.clientX - r.left) + 'px');
-                inner.style.setProperty('--mouse-y', (e.clientY - r.top) + 'px');
+                if (isScrolling) return;
+                if (!innerRect) innerRect = inner.getBoundingClientRect();
+                inner.style.setProperty('--mouse-x', (e.clientX - innerRect.left) + 'px');
+                inner.style.setProperty('--mouse-y', (e.clientY - innerRect.top) + 'px');
             }, { passive: true });
+            inner.addEventListener('mouseleave', () => { innerRect = null; }, { passive: true });
         }
     });
 })();
@@ -1028,6 +1080,7 @@ void main() {
                 targetHeight = activeLink.offsetHeight;
                 targetLeft = li.offsetLeft + activeLink.offsetLeft;
                 targetTop = li.offsetTop + activeLink.offsetTop;
+                startNavAnimation();
             }
         }
     }
@@ -1079,13 +1132,9 @@ void main() {
         updateNavMetrics();
     }
 
-    function animate() {
-        // Spring-like interpolation
-        currentLeft += (targetLeft - currentLeft) * 0.12;
-        currentWidth += (targetWidth - currentWidth) * 0.12;
-        currentHeight += (targetHeight - currentHeight) * 0.12;
-        currentTop += (targetTop - currentTop) * 0.12;
+    let isNavAnimating = false;
 
+    function applyNavStyles() {
         if (pill) {
             pill.style.width = `${currentWidth}px`;
             pill.style.height = `${currentHeight}px`;
@@ -1097,21 +1146,61 @@ void main() {
             const mascotCenterOffset = (currentWidth / 2) - 22;
             mascot.style.left = `${currentLeft + mascotCenterOffset}px`;
 
-            // Handle scale and vertical offset in JS to avoid CSS transform conflicts
-            const isScrolled = document.getElementById('header').classList.contains('is-scrolled');
+            const isScrolled = document.getElementById('header')?.classList.contains('is-scrolled');
             const scale = isScrolled ? 0.75 : 1;
             mascot.style.transform = `translateY(${currentTop * 0.5}px) scale(${scale})`;
         }
+    }
 
+    function startNavAnimation() {
+        if (!isNavAnimating) {
+            isNavAnimating = true;
+            requestAnimationFrame(animate);
+        }
+    }
+
+    function animate() {
+        const dL = targetLeft - currentLeft;
+        const dW = targetWidth - currentWidth;
+        const dH = targetHeight - currentHeight;
+        const dT = targetTop - currentTop;
+
+        if (Math.abs(dL) < 0.2 && Math.abs(dW) < 0.2 && Math.abs(dH) < 0.2 && Math.abs(dT) < 0.2) {
+            currentLeft = targetLeft;
+            currentWidth = targetWidth;
+            currentHeight = targetHeight;
+            currentTop = targetTop;
+            applyNavStyles();
+            isNavAnimating = false;
+            return;
+        }
+
+        currentLeft += dL * 0.15;
+        currentWidth += dW * 0.15;
+        currentHeight += dH * 0.15;
+        currentTop += dT * 0.15;
+
+        applyNavStyles();
         requestAnimationFrame(animate);
     }
 
-    window.addEventListener('scroll', highlightActiveLink, { passive: true });
+    let scrollNavTicking = false;
+    window.addEventListener('scroll', () => {
+        if (!scrollNavTicking) {
+            scrollNavTicking = true;
+            requestAnimationFrame(() => {
+                highlightActiveLink();
+                scrollNavTicking = false;
+            });
+        }
+    }, { passive: true });
+
     window.addEventListener('resize', () => {
         updateNavMetrics();
         currentLeft = targetLeft;
         currentWidth = targetWidth;
-    });
+        applyNavStyles();
+    }, { passive: true });
 
     // Initial sync
     function init() {
@@ -1119,7 +1208,9 @@ void main() {
         updateNavMetrics();
         currentLeft = targetLeft;
         currentWidth = targetWidth;
-        animate();
+        currentHeight = targetHeight;
+        currentTop = targetTop;
+        applyNavStyles();
     }
 
     if (document.readyState === 'complete') {
@@ -1323,7 +1414,9 @@ window.addEventListener('load', () => {
     const certCards = document.querySelectorAll('.cert-card');
 
     const handleTilt = (card, e, isCert = false) => {
-        const rect = card.getBoundingClientRect();
+        if (isScrolling) return;
+        if (!card._cachedRect) card._cachedRect = card.getBoundingClientRect();
+        const rect = card._cachedRect;
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
@@ -1346,8 +1439,10 @@ window.addEventListener('load', () => {
     };
 
     cards.forEach(card => {
+        card.addEventListener('mouseenter', () => { card._cachedRect = card.getBoundingClientRect(); }, { passive: true });
         card.addEventListener('mousemove', e => handleTilt(card, e), { passive: true });
         card.addEventListener('mouseleave', () => {
+            card._cachedRect = null;
             requestAnimationFrame(() => {
                 card.style.transform = '';
                 card.style.transition = 'transform 0.6s var(--ease)';
@@ -1357,7 +1452,9 @@ window.addEventListener('load', () => {
     });
 
     certCards.forEach(card => {
+        card.addEventListener('mouseenter', () => { card._cachedRect = card.getBoundingClientRect(); }, { passive: true });
         card.addEventListener('mousemove', e => handleTilt(card, e, true), { passive: true });
+        card.addEventListener('mouseleave', () => { card._cachedRect = null; }, { passive: true });
     });
 })();
 
@@ -1394,6 +1491,19 @@ window.addEventListener('load', () => {
     const contactEl = document.getElementById('eth-rotate-contact');
     if (!heroEl && !contactEl) return;
 
+    const heroSection = document.getElementById('hero');
+    const contactSection = document.getElementById('contact');
+
+    let isHeroVisible = true;
+    let isContactVisible = false;
+
+    if (heroSection) {
+        new IntersectionObserver(([e]) => { isHeroVisible = e.isIntersecting; }, { threshold: 0.05 }).observe(heroSection);
+    }
+    if (contactSection) {
+        new IntersectionObserver(([e]) => { isContactVisible = e.isIntersecting; }, { threshold: 0.05 }).observe(contactSection);
+    }
+
     const SPEED_HERO = 0.36;
     const SPEED_CONTACT = 0.22;
 
@@ -1401,25 +1511,30 @@ window.addEventListener('load', () => {
     let hueContact = 0;
 
     function animateEthereal() {
-        hueHero = (hueHero + SPEED_HERO) % 360;
-        hueContact = (hueContact + SPEED_CONTACT) % 360;
-
-        if (heroEl) heroEl.setAttribute('values', String(hueHero.toFixed(2)));
-        if (contactEl) contactEl.setAttribute('values', String(hueContact.toFixed(2)));
-
+        if (!isScrolling) {
+            if (isHeroVisible && heroEl) {
+                hueHero = (hueHero + SPEED_HERO) % 360;
+                heroEl.setAttribute('values', String(hueHero.toFixed(1)));
+            }
+            if (isContactVisible && contactEl) {
+                hueContact = (hueContact + SPEED_CONTACT) % 360;
+                contactEl.setAttribute('values', String(hueContact.toFixed(1)));
+            }
+        }
         requestAnimationFrame(animateEthereal);
     }
 
     animateEthereal();
 
     window.addEventListener('mousemove', e => {
-        const xPct = (e.clientX / window.innerWidth - 0.5) * 12;
-        const yPct = (e.clientY / window.innerHeight - 0.5) * 8;
+        if (isScrolling || !isHeroVisible) return;
+        const xPct = (e.clientX / (window.innerWidth || 1) - 0.5) * 12;
+        const yPct = (e.clientY / (window.innerHeight || 1) - 0.5) * 8;
         const inner = document.getElementById('ethereal-inner-hero');
         if (inner) {
             inner.style.transform = `translate(${xPct}px, ${yPct}px)`;
         }
-    });
+    }, { passive: true });
 })();
 
 
@@ -1780,8 +1895,19 @@ void main(){
     resize();
 
     let prev = performance.now();
+    let isLaserVisible = false;
+    let laserRaf = null;
+
     function animate() {
-        requestAnimationFrame(animate);
+        if (!isLaserVisible) {
+            laserRaf = null;
+            return;
+        }
+
+        laserRaf = requestAnimationFrame(animate);
+
+        if (isScrolling) return; // Pause rendering during active scroll to ensure 60fps smoothness
+
         const now = performance.now();
         const dt = Math.min(0.05, (now - prev) / 1000);
         prev = now;
@@ -1797,7 +1923,15 @@ void main(){
 
         renderer.render(scene, camera);
     }
-    animate();
+
+    const laserObserver = new IntersectionObserver(([entry]) => {
+        isLaserVisible = entry.isIntersecting;
+        if (isLaserVisible && !laserRaf) {
+            prev = performance.now();
+            laserRaf = requestAnimationFrame(animate);
+        }
+    }, { threshold: 0.05 });
+    laserObserver.observe(mount);
 
     window.addEventListener('beforeunload', () => {
         ro.disconnect();
@@ -1941,101 +2075,6 @@ void main(){
     });
 })();
 
-
-/* ═══════════════════════════════════════════════════════════
-   11. SMART SPLINE MANAGEMENT (Extreme Efficiency)
-═══════════════════════════════════════════════════════════ */
-(function manageSpline() {
-    // 1. Extreme Lazy Load + Unload (Free up GPU Memory)
-    const lazyObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const viewer = entry.target;
-            const url = viewer.getAttribute('data-url');
-            const gallery = viewer.closest('.work__gallery');
-            const isActiveGallery = gallery ? gallery.classList.contains('is-active') : true;
-
-            if (entry.isIntersecting && isActiveGallery) {
-                // Load model when entering view - with staggered delay to avoid thread lock
-                if (url && !viewer.getAttribute('url')) {
-                    const delay = Math.random() * 300;
-                    setTimeout(() => {
-                        // Double check visibility before loading
-                        if (!viewer.getAttribute('url') && gallery.classList.contains('is-active')) {
-                            // Show loader immediately
-                            const loader = viewer.parentElement.querySelector('.spline-loader');
-                            if (loader) {
-                                loader.classList.remove('is-hidden');
-                            }
-                            viewer.setAttribute('url', url);
-                            viewer.setAttribute('hint', 'performance');
-                        }
-                    }, delay);
-                }
-            } else {
-                // Unload model when leaving view or gallery is hidden to keep GPU clean
-                if (viewer.getAttribute('url')) {
-                    viewer.removeAttribute('url');
-                }
-            }
-        });
-    }, { threshold: 0.01, rootMargin: '500px' });
-
-    // Listen for tab changes to trigger re-evaluation
-    document.querySelectorAll('.work__tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            setTimeout(() => {
-                document.querySelectorAll('spline-viewer').forEach(v => {
-                    lazyObserver.unobserve(v);
-                    lazyObserver.observe(v);
-                });
-            }, 450); // Small delay for tab transition to start
-        });
-    });
-
-    // 2. Branding Removal & Context Management
-    const mutationObserver = new MutationObserver(() => {
-        const viewers = document.querySelectorAll('spline-viewer');
-        viewers.forEach(viewer => {
-            lazyObserver.observe(viewer);
-
-            // Add Custom Loader Element if not exists
-            if (!viewer.parentElement.querySelector('.spline-loader')) {
-                const loader = document.createElement('div');
-                loader.className = 'spline-loader';
-                loader.innerHTML = '<div class="spline-spinner"></div><span class="spline-loader-text">Loading 3D Model...</span>';
-                viewer.parentElement.appendChild(loader);
-
-                // For Spline Viewer, the safest way to detect load is an interval check or custom event.
-                // We'll listen for the specific 'load' event fired by the web component
-                viewer.addEventListener('load-complete', () => {
-                   loader.classList.add('is-hidden');
-                });
-                // Fallback: also listen to standard load just in case
-                viewer.addEventListener('load', () => {
-                    loader.classList.add('is-hidden');
-                });
-                
-                // Backup timeout just in case the event fails to fire (prevents infinite loading)
-                setTimeout(() => {
-                    if(loader) loader.classList.add('is-hidden');
-                }, 8000); 
-            }
-
-            if (viewer.shadowRoot && !viewer.shadowRoot.querySelector('.logo-hidden-style')) {
-                const s = document.createElement('style');
-                s.classList.add('logo-hidden-style');
-                s.innerHTML = `
-                    #logo, .spline-logo, a[href*="spline.design"], #logo + div { 
-                        display: none !important; opacity: 0 !important; visibility: hidden !important; 
-                    }
-                `;
-                viewer.shadowRoot.appendChild(s);
-            }
-        });
-    });
-
-    mutationObserver.observe(document.body, { childList: true, subtree: true });
-})();
 
 /* 12. HERO CONTACT BUTTON SCROLL */
 document.getElementById('card-contact-btn')?.addEventListener('click', () => {
